@@ -1,0 +1,144 @@
+// 1. Load SASS variables
+@import './../../../assets/scss/variable'; // [1]
+
+$ak-product-header-background: #def2f3;
+
+
+// 1. rem() converts px unit to rem unit
+// rem unit scales based on root font-size.
+// It will allow an application to be scalable
+.ak-product {
+  width: rem(1140); // [1]
+
+  @include desktop {
+    margin-top: rem($g-spacing-2x-large);
+  }
+}
+
+.ak-product-header {
+  display: flex;
+  justify-content: space-between;
+
+  background-color: $ak-product-header-background;
+  padding: rem($g-spacing-small) rem($g-spacing);
+  margin-bottom: rem($g-spacing-x-small);
+}
+
+.ak-product-header__title {
+  font-size: rem($g-font-size-2x-large);
+}
+
+.ak-product-header__filter {
+  font-size: rem($g-font-size-small);
+}
+
+// 1. We could use flex-grid instead of grid but grid is simpler
+.ak-product__list {
+  display: grid; // [1]
+  justify-content: stretch;
+  grid-template-columns: 100%;
+  border-top: 1px solid $g-color-border;
+  border-left: 1px solid $g-color-border;
+
+  /**
+  * Mobile first method
+  * for breakpoints, check src/assets/scss/mixins/_media-query.scss
+  *
+  * If lagacy browser support is critical, we couold use
+  *
+  * .ak-product__item {
+  *   float: left:
+  *   display: inline-block;
+  *   width: 25%;
+  *
+  *   @include tablet {
+  *     width: 33.33%;
+  *   }
+  *
+  *   @include desktop {
+  *     width: 50%;
+  *   }
+  * }
+  *
+  * IE8 does't support media-query but we could use white label css for IE8,
+  */
+
+  @include tablet {
+    grid-template-columns: 33.33% 33.33% 33.33%;
+  }
+
+  @include desktop {
+    grid-template-columns: 25% 25% 25% 25%;
+  }
+}
+
+.ak-product__list--failure {
+  border: 0;
+}
+
+.ak-product__item {
+  border-right: 1px solid $g-color-border;
+  border-bottom: 1px solid $g-color-border;
+  padding: rem($g-spacing-small) rem($g-spacing);
+}
+
+.ak-product__image {
+  margin-bottom: rem($g-spacing-large);
+  width: 100%;
+}
+
+.ak-product__promo {
+  margin-bottom: rem($g-spacing);
+  height: rem(44);
+}
+
+.ak-product__promo-text {
+  display: inline-block;
+  padding: rem($g-spacing-x-small) rem($g-spacing-small);
+
+  @include tablet {
+    padding: rem($g-spacing-small) rem($g-spacing);
+  }
+}
+
+.ak-product__promo-text--sale {
+  background-color: $g-color-danger;
+  color: $g-color-white;
+}
+
+.ak-product__promo-text--exclusive {
+  background-color: $g-color-success;
+  color: $g-color-white;
+}
+
+// 1. Better approch than child elements float: left, right;
+.ak-product__caption {
+  display: flex;
+  flex-flow: column;
+
+  @include desktop {
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-between; // [1]
+  }
+}
+
+.ak-product__name {
+  font-size: rem($g-font-size-large);
+  font-weight: $g-font-weight-bold;
+  margin-right: rem($g-spacing-small);
+  margin-bottom: rem($g-spacing-x-small);
+
+  @include tablet {
+    font-size: rem($g-font-size-x-large);
+  }
+}
+
+.ak-product__price {
+  font-size: rem($g-font-size-2x-large);
+  font-weight: $g-font-weight-bold;
+
+  @include tablet {
+    font-size: rem($g-font-size-3x-large);
+  }
+}
